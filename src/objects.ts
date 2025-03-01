@@ -38,7 +38,7 @@ export function isCorrect(question: Question, answer: string): boolean {
 export function isValid(question: Question, answer: string): boolean {
     if (question.type === "short_answer_question") {
         return true;
-    } else if (question.type === "multiple_choice_question" && question.options.includes(answer)) {
+    } else if (question.options.includes(answer)) {
         return true;
     } else {
         return false;
@@ -149,7 +149,7 @@ export function mergeQuestion(
     { points }: { points: number }
 ): Question {
     let newQuestion: Question = {...contentQuestion, id: id, name: name, points: points, published: false};
-    
+
     newQuestion.options = [...contentQuestion.options];
     return newQuestion;
 }
