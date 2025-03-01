@@ -99,17 +99,26 @@ export function renameQuestion(question: Question, newName: string): Question {
  * published; if it was published, now it should be not published.
  */
 export function publishQuestion(question: Question): Question {
-    return question;
+    let newQuestion: Question = {...question};
+    newQuestion.published = !(newQuestion.published);
+    newQuestion.options = [...question.options];
+    return newQuestion;
 }
 
 /**
  * Create a new question based on the old question, copying over its `body`, `type`,
  * `options`, `expected`, and `points` without changes. The `name` should be copied
  * over as "Copy of ORIGINAL NAME" (e.g., so "Question 1" would become "Copy of Question 1").
- * The `published` field should be reset to false.
+ * The `published` field should be reset to false. The 'id' field should be changed to
+ * the id passed to the function
  */
 export function duplicateQuestion(id: number, oldQuestion: Question): Question {
-    return oldQuestion;
+    let newQuestion: Question = {...oldQuestion};
+    newQuestion.published = false;
+    newQuestion.options = [...oldQuestion.options];
+    newQuestion.name = `Copy of ${oldQuestion.name}`;
+    newQuestion.id = id;
+    return newQuestion;
 }
 
 /**
